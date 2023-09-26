@@ -29,10 +29,6 @@ public class PlaySound : MonoBehaviour
 
         if (Input.GetMouseButtonDown(1))
         {
-            if (_source.clip.Equals(null))
-            {
-                AddRandomClipToSource();
-            }
             if (_source.isPlaying)
             {
                 _source.Pause();
@@ -46,10 +42,6 @@ public class PlaySound : MonoBehaviour
 
         if (Input.GetMouseButtonDown(2))
         {
-            if (_source.clip.Equals(null))
-            {
-                AddRandomClipToSource();
-            }
             if (_source.isPlaying)
             {
                 _source.Stop();
