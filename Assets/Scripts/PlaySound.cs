@@ -4,42 +4,62 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource[]))]
 public class PlaySound : MonoBehaviour
 {
-    [SerializeField] private AudioSource[] audioDataList;
+    [SerializeField] private AudioClip[] audioClipList;
     [SerializeField] private int currentAudio;
+    private AudioSource _source;
 
+    void Start()
+    {
+        _source = gameObject.GetComponent<AudioSource>();
+    }
     // Update is called once per frame
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (audioDataList[currentAudio].isPlaying)
+            if (_source.isPlaying)
             {
-                audioDataList[currentAudio].Stop();
+                _source.Stop();
             }
-            currentAudio = Random.Range(0, audioDataList.Length - 1);
-            audioDataList[currentAudio].loop = true;
-            audioDataList[currentAudio].Play();
+
+            AddRandomClipToSource();
+            _source.loop = true;
+            _source.Play();
         }
 
         if (Input.GetMouseButtonDown(1))
         {
-            if (audioDataList[currentAudio].isPlaying)
+            if (_source.clip.Equals(null))
             {
-                audioDataList[currentAudio].Pause();
+                AddRandomClipToSource();
+            }
+            if (_source.isPlaying)
+            {
+                _source.Pause();
             }
             else
             {
-                audioDataList[currentAudio].Play();
+                _source.Play();
             }
             
         }
 
         if (Input.GetMouseButtonDown(2))
         {
-            if (audioDataList[currentAudio].isPlaying)
+            if (_source.clip.Equals(null))
             {
-                audioDataList[currentAudio].Stop();
+                AddRandomClipToSource();
+            }
+            if (_source.isPlaying)
+            {
+                _source.Stop();
             }
         }
+    }
+
+    private void AddRandomClipToSource()
+    {
+        currentAudio = Random.Range(0, audioClipList.Length - 1);
+        _source.clip = audioClipList[currentAudio];
     }
 }
