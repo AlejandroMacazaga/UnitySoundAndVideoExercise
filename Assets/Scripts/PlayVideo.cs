@@ -22,6 +22,7 @@ public class PlayVideo : MonoBehaviour
             string nameOfRaycastHit = Raycast();
             if (nameOfRaycastHit.Equals("Pause Button"))
             {
+                
                 Debug.Log("Pausing the video");
             }
             if (nameOfRaycastHit.Equals("Stop Button"))
