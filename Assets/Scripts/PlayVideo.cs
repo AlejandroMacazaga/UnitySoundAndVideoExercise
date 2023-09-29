@@ -7,6 +7,8 @@ public class PlayVideo : MonoBehaviour
 {
 
     [SerializeField] private int maxDistance = 100;
+    [SerializeField] private int currentVideo;
+    [SerializeField] private VideoClip[] videoSources;
     private VideoPlayer _video;
     private Camera _camera;
     // Start is called before the first frame update
@@ -24,16 +26,30 @@ public class PlayVideo : MonoBehaviour
             string nameOfRaycastHit = Raycast();
             if (nameOfRaycastHit.Equals("Pause Button"))
             {
-                
-                Debug.Log("Pausing the video");
+                if (_video.isPlaying)
+                {
+                    _video.Pause();
+                }
+                else
+                {
+                    _video.Play();
+                }
             }
             if (nameOfRaycastHit.Equals("Stop Button"))
             {
-                Debug.Log("Stopping the video");
+
+                _video.Stop();
             }
             if (nameOfRaycastHit.Equals("Start Button"))
             {
-                Debug.Log("Starting the video");
+                
+                if (_video.isPlaying)
+                {
+                    _video.Stop();
+                }
+
+                AddRandomVideoToSource();
+                _video.Play();
             }
         }
     }
@@ -48,5 +64,11 @@ public class PlayVideo : MonoBehaviour
         }
 
         return "Bust";
+    }
+    
+    private void AddRandomVideoToSource()
+    {
+        currentVideo = Random.Range(0, videoSources.Length);
+        _video.clip =  videoSources[currentVideo];
     }
 }

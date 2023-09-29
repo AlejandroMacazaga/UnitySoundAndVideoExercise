@@ -51,7 +51,7 @@ public class PlaySound : MonoBehaviour
 
     private void AddRandomClipToSource()
     {
-        currentAudio = Random.Range(0, audioClipList.Length - 1);
+        currentAudio = Random.Range(0, audioClipList.Length);
         _source.clip = audioClipList[currentAudio];
     }
 }
